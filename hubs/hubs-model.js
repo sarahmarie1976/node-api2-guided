@@ -2,6 +2,8 @@ const knex = require('knex');
 const config = require('../knexfile.js');
 const db = knex(config.development);
 
+
+// we are exporting an object that has this find function
 module.exports = {
   find,
   findById,
@@ -17,10 +19,10 @@ function find(query) {
   const { page = 1, limit = 2, sortby = 'id', sortdir = 'asc' } = query;
   const offset = limit * (page - 1);
 
-  let rows = db('hubs')
-    .orderBy(sortby, sortdir)
-    .limit(limit)
-    .offset(offset);
+  let rows = db('hubs')  // I want to see data on the hubs
+    .orderBy(sortby, sortdir)  // using a library organizing sortby and sortdir
+    .limit(limit)  // how we tell the db 
+    .offset(offset);  // how many records I want to skip
 
   return rows;
 }
